@@ -34,9 +34,10 @@
     }
 
     footer {
-        background: linear-gradient(to bottom left, #ff9966 20%, #3366ff 100%);
+        background: white;
         text-align: center;
         padding:10px;
+        color: red;
     }
         
     .grid-container{
@@ -89,27 +90,16 @@
         I fisrts began studying computer science in my Senior year of high school and became interested in
         it and decided that I wnated to learn more to better understand how the devices we use today work.
         I go to Alabama A&M University as a Computer Science major.
-        Now I am a Summer 2020 Google STEP Intern during the COVID-19 pandemic.
-    </p>I learned how to play trumpet during my 8th grade and continue to play through highschool and colleg.
-        I was trumpet section leader in high school from 2017-2019, and left my teachings to the generation that is next to come.
-        Now, I am Currently a member of the Marching Maroon and White Band(MMW) at Alabama A&M University.
-    <p> </p>
+        Now I am a Summer 2020 Google STEP Intern during the COVID-19 pandemic.</p>
   </div>
   
 <div class="grid-content">
-    <h2> Hope You Enjoyed</h2>
-    <p>this should be the right side of the page
-
-</div>
-
-
+    <h2> Fun Facts</h2>
+    <p>I learned how to play trumpet during my 8th grade and continue to play through highschool and colleg.
+        Now, I am Currently a member of the Marching Maroon and White Band(MMW) at Alabama A&M University.
+        My favorite color is blue and I prefer dogs over cats.</p>
 </div>
 </article>
-
-<section>
-    <h2>More Information</h2>
-
-</section>
 
 <footer>
     <p>For more information, click 
@@ -117,8 +107,8 @@
 
 </footer>
 
-<body>
- <div id="content">
+<body onload="getData">
+  <div id="content">
     <h2>Follow me on Social Media</h2>
 
    <p> ................................................................... </p>
@@ -129,6 +119,12 @@
     <p>Click here to get a random message:</p>
     <button onclick="addRandomGreeting()">Hello</button>
     <div id="greeting-container"></div>
- </div>
+
+    <button onclick="getData()">Get data</button>
+    <div id="data-container"></div>
+
+  </div>
 </body>
+
+
 </html>
