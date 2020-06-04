@@ -27,18 +27,41 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  public ArrayList<String> comments = new ArrayList<String>(List.of("boom", "bang", "pow"));
+//    public ArrayList<String> comments = new ArrayList<String>(List.of("boom", "bam", "pow"));
+
 
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // obtain input from form(the user's comment)
+    String userComment = getParameter(request, "userCommentInput", "");
+    
+    // seperate words into indivdual text
+    String[] words = userComment.split("\\s*,\\s*");
+
+    // Respond with the result.
     response.setContentType("text/html;");
-    String json = convertToJsonUsingGson(comments);
-    response.getWriter().println(json);
+    response.getWriter().println(Arrays.toString(words));
   }
+  
+//   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//     // Get the input from the form.
+//     response.setContentType("text/html;");
+//     String userComment = getParameter(request, "userCommentInput", "");
+//     response.getWriter().println(userComment);
+//   }
   
   public String convertToJsonUsingGson(ArrayList<String> list) {
     Gson gson = new Gson();
-    String json = gson.toJson(list);
-    return json;
+    String userComment = gson.toJson(list);
+    return userComment;
+  }
+    
+    //requst parameter was not specified by client
+  public String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
   }
 }
