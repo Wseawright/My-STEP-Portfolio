@@ -16,7 +16,12 @@ package com.google.sps.servlets;
 
 import com.google.gson.Gson;
 import java.util.*;
-import com.google.appengine.api.datastore.*;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -27,20 +32,52 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
+  public class Task {
+    public long id;
+    public String commentInput;
+    public long timestamp;
+
+    public Task(long id, String commentInput, long timestamp) {
+        this.id = id;
+        this.commentInput = commentInput;
+        this.timestamp = timestamp;
+    }
+  }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String userComment = getParameter(request, "userCommentInput", "");
+    String commentInput = getParameter(request, "commentInput", "");
+    long timestamp = System.currentTimeMillis();
     
     Entity commentEntity = new Entity("Comment");
-    commentEntity.setProperty("userCommentInput", userComment);
+    commentEntity.setProperty("timestamp", timestamp);
+    commentEntity.setProperty("commentInput", commentInput);
     
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
     
     response.sendRedirect("/index.html");
-  }
+  
+// load comments code
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
     
+    PreparedQuery results = datastore.prepare(query);
+    
+    List<Task> comments = new ArrayList<>();
+    for (Entity Comment : results.asIterable()) {
+        commentEntity.getProperty("timestamp");
+        commentEntity.getProperty("commentInput");
+        long id = commentEntity.getKey().getId();
+    
+    Task comment = new Task(id, commentInput, timestamp);
+    comments.add(comment);
+   }
+    
+    Gson gson = new Gson();
+    response.setContentType("application/json;");
+    response.getWriter().println(gson.toJson(comments));
+   }
+
     //requst parameter was not specified by client
   public String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
@@ -49,6 +86,5 @@ public class DataServlet extends HttpServlet {
     }
     return value;
     }
-
-  }
 }
+

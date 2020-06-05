@@ -1,136 +1,144 @@
 <!DOCTYPE html>
 <html>
+<title>Willam Seawright Portfolio</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
-    header {
-        background: linear-gradient(to bottom left, #ff9966 20%, #3366ff 100%);
-        padding: 30px;
-        text-align: center;
-        color: black;
-        font-size: 40px;
-        border:5px solid lightgrey;
-    }
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat"}
+.w3-row-padding img {margin-bottom: 12px}
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {width: 120px;background: darkblue;}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
 
-    aside {
-        background:white;
-        padding: 7px;
-        border: 3px solid grey;
-        color: green;
-    }
-    
-    article {
-        -webkit-flex: 5;
-        -ms-flex: 5;
-        flex: 5;
-        background: lightgrey;
-        padding:10px;
-        text-align: left;
-        color: black;
-    }
+</style>
 
-     section{
-        background:white;
-        text-align:center;
-        color:red;
-    }
+<body class="w3-black">
 
-    footer {
-        background: white;
-        text-align: center;
-        padding:10px;
-        color: red;
-    }
-        
-    .grid-container{
-        display:grid;
-        grid-template-areas:auto auto;
-        background-color: lightgrey;
-        padding:3px;
-    }
-
-    .grid-content {
-        background-color: rgba(255, 255, 255, 1);
-        text-align: left;
-        border: 5px solid grey;
-        padding: 30px;
-        font-size: 20px;
-    }
-    
-    line {display: inline;}
-
-</style>  
-
-<head>
-    <meta charset="UTF-8">
-    <title>William J. Seawright</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-</head>
+<!-- Icon Bar (Sidebar) -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
   
+  <!-- image in top left corner -->
+  <img src="images/pic_me.jpg/" style="width:100%">
+  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <p>HOME</p>
+  </a>
+  <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <p>About Me</p>
+  </a>
+  <a href="#photos" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <p>PHOTOS</p>
+  </a>
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <p>Contact</p>
+  </a>
+</nav>
 
-<header>
-    <h1>William J. Seawright</h1>
-    <p>/Google STEP Intern\</p>
-</header>
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+  <!-- Header/Home -->
+  <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+    <h1 class="w3-jumbo">..William J. Seawright..</h1>
+    <p>|Google STEP Intern||Alabama A&M University|</p>
+  </header>
 
-<aside>
-    <ul>
-        <line>| <a href="https://github.com/Wseawright">Github |</a></line>
-        <line>| <a href="https://www.linkedin.com/in/william-seawright-80a3a2189/">Linkedin |</a></line>
-        <line>| <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to=wseawright@google.com">Email |</a></line>
-        <line>| <a href="https://docs.google.com/document/d/1xuEUiwxLqG0Xc5_LBXVeyX5kamAPtqIJWV9uakE87GI/edit?usp=sharing">Resume |</a></line>
-    </ul>
-</aside>
-
-<article>
-<div class="grid-container">
-<div class="grid-content">
-    <h2> (About Me)</h2>    
-    <img src="images/pic_me.jpg/">
+  <!-- About Me -->
+  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+    <h2 class="w3-text-light-grey">About Me</h2>
+    <hr style="width:200px" class="w3-opacity">
+    
     <p>I am a 2019 graduate, born and raised in Montgomery, Alabama. 
         I fisrts began studying computer science in my Senior year of high school and became interested in
         it and decided that I wnated to learn more to better understand how the devices we use today work.
         I go to Alabama A&M University as a Computer Science major.
         Now I am a Summer 2020 Google STEP Intern during the COVID-19 pandemic.</p>
-</div>
-  
-<div class="grid-content">
-    <h2> Fun Facts</h2>
     <p>I learned how to play trumpet during my 8th grade and continue to play through highschool and colleg.
         Now, I am Currently a member of the Marching Maroon and White Band(MMW) at Alabama A&M University.
         My favorite color is blue and I prefer dogs over cats.</p>
-</div>
-</article>
 
-<footer>
-    <p>For more information, click 
-    <a href="https://docs.google.com/document/d/110dpvvHuPOQCzYfzWJAk_aRI2Gwm500WfBO5iO9vxus/edit?usp=sharing">here.</a></p>
+    <h3 class="w3-padding-16 w3-text-light-grey">My Skills</h3>
+    <p class="w3-wide">Python</p>
+    <div class="w3-white">
+      <div class="w3-dark-grey" style="height:28px;width:80%"></div>
+    </div>
+    
+    <p class="w3-wide">C++</p>
+    <div class="w3-white">
+      <div class="w3-dark-grey" style="height:28px;width:45%"></div>
+    </div>
+    
+    <p class="w3-wide">Java</p>
+    <div class="w3-white">
+      <div class="w3-dark-grey" style="height:28px;width:60%"></div>
+    </div><br>
 
-</footer>
-
-<body>
-  <div id="content">
-    <h2>Follow me on Social Media</h2>
-
-   <p> ................................................................... </p>
-   <p style="color:blue;">instagram: JJC_additional </p>
-   <p style="color:blue;">Snapchat: random-legend </p>
-   <p style="color:blue;">Facebook: Jonathan Seawright </p>
-
-    <p>Click here to get a random message:</p>
-    <button onclick="getData()">Get data</button>
-    <div id="data-container"></div>
-
+    <a class="w3-button w3-light-grey w3-padding-large w3-section" href="https://docs.google.com/document/d/1xuEUiwxLqG0Xc5_LBXVeyX5kamAPtqIJWV9uakE87GI/edit?usp=sharing">
+        Resume
+    </a>
+    
+    
+    <!-- Testimonials -->
+    <h3 class="w3-padding-24 w3-text-light-grey">My Reputation</h3>  
+    <img src="/w3images/bandmember.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
+    <p><span class="w3-large w3-margin-right">Chris Fox.</span> CEO at Mighty Schools.</p>
+    <p>John Doe saved us from a web disaster.</p><br>
+    
+    <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
+    <p><span class="w3-large w3-margin-right">Rebecca Flex.</span> CEO at Company.</p>
+    <p>No one is better than John Doe.</p>
+  <!-- End About Section -->
   </div>
-</body>
+  
+  <!-- Photos -->
+  <div class="w3-padding-64 w3-content" id="photos">
+    <h2 class="w3-text-light-grey">My Photos</h2>
+    <hr style="width:200px" class="w3-opacity">
 
-<body>
-    <form action="/data" method="POST"> 
-        <h3> Comments</h3>
-        <textarea name="userCommentInput" type="text">Enter Comment</textarea>
-        
-        <input type="submit"/>
+    <!-- Grid for photos -->
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-half">
+        <img src="images/pic_me2.jpg" style="width:100%">
+        <img src="images/pic_me.jpg" style="width:100%">
+        <img src="images/pic_me3.jpg" style="width:100%">
+      </div>
 
+      <div class="w3-half">
+        <img src="images/pic_me7.jpg" style="width:100%">
+        <img src="images/pic_me5.jpg" style="width:100%">
+        <img src="images/pic_me6.jpg" style="width:100%">
+      </div>
+    <!-- End photo grid -->
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="w3-padding-64 w3-content w3-text-grey" id="contact">
+    <h2 class="w3-text-light-grey">Contact Me</h2>
+    <hr style="width:200px" class="w3-opacity">
+
+    <div class="w3-section">
+      <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Montgomery, AL</p>
+      <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Phone: (334)777-XXXX </p>
+      <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </i> Email: <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to=wseawright@google.com"> wseawright@google.com </a></p>
+    </div><br>
+      
+  <!-- Comments Section -->
+    <p>Leave a comment:</p>
+    <form action="/data" method="POST">
+        <p><input class="w3-input w3-padding-16" type="text" name="commentInput" placeholder="comment"></p>
+        <button class="w3-button w3-light-grey w3-padding-large" type="submit"> Leave Comment </button>
     </form>
-</body>
+  </div>
+  
+    <!-- Footer -->
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <a href="https://www.linkedin.com/in/william-seawright-80a3a2189/"> 
+        <i class="fa fa-linkedin w3-hover-opacity"></i></a>
+    <p class="w3-medium">William J. Seawright</p>
+  <!-- End footer -->
+  </footer>
 
-</html>
+<!-- END PAGE CONTENT -->
