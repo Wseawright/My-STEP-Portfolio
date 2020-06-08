@@ -33,4 +33,10 @@ function getData() {
   });
 }
 
+function getStatus() {
+  fetch('/status').then(response => response.text()).then((data) => {
+    document.getElementById('data-container').innerText = data;
+  });
+}
+
 
