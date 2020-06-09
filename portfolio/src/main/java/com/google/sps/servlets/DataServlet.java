@@ -57,10 +57,6 @@ public class DataServlet extends HttpServlet {
     
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
-    
-    response.setContentType("text/html;");
-    response.getWriter().println(commentEntity);
-    response.sendRedirect("/index.html");
 
 // load comments code
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
