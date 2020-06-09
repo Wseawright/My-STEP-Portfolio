@@ -27,34 +27,26 @@ function addRandomGreeting() {
   greetingContainer.innerText = greeting;
 }
 function getData() {
-  fetch('/data').then(response => response.text()).then((data) => {
-    document.getElementById('data-container').innerText = data;
+  fetch('/data').then(response => response.text()).then((txt) => {
+    document.getElementById('data-container').innerText = txt;
   });
 }
 
 function loadUser(){
     fetch('/status').then(response => response.text()).then((txt) => {
+    const loginElement = document.getElementById('login');
+    console.log(txt)
+    loginElement.innerHTML = txt;
     var form = document.getElementById("commentSection");
     if (txt.includes("You")) {
-      form.style.hidden;
-      document.getElementById("error").innerHTML = "<i>" + txt + "</i>";
+      form.style.display = "none";
+      document.getElementById("login").innerHTML = "<i>" + txt + "</i>";
     } else{
-      document.getElementById("error").innerHTML = "<i>" + txt + "</i>";
+      document.getElementById("login").innerHTML = "<i>" + txt + "</i>";
     }});
 }
 
-function login() {
-  fetch('/status').then(response => response.text()).then((txt) => {
-     const loginElement = document.getElementById('login');
-     console.log(txt)
-     loginElement.innerHTML = txt;
-  });
-}
-
 function loadPage(){
-    login();
-    getStatus();
     getData();
     loadUser();
-
 }

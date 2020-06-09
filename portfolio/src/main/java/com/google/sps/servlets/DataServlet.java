@@ -35,41 +35,42 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   public class Task {
-    public long id;
     public String commentInput;
     public long timestamp;
+    public String name;
 
-    public Task(long id, String commentInput, long timestamp) {
-        this.id = id;
+    public Task(String name, String commentInput, long timestamp) {
         this.commentInput = commentInput;
         this.timestamp = timestamp;
+        this.name = name;
     }
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String commentInput = getParameter(request, "commentInput", "");
+    String name = getParameter(request, "name", "");
     long timestamp = System.currentTimeMillis();
     
-    Entity commentEntity = new Entity("Comment");
+    Entity commentEntity = new Entity("Comments");
     commentEntity.setProperty("timestamp", timestamp);
     commentEntity.setProperty("commentInput", commentInput);
+    commentEntity.setProperty("name", name);
     
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
 // load comments code
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
-    
+    Query query = new Query("Comments").addSort("timestamp", SortDirection.DESCENDING);
     PreparedQuery results = datastore.prepare(query);
     
     List<Task> comments = new ArrayList<>();
     for (Entity Comment : results.asIterable()) {
         commentEntity.getProperty("timestamp");
         commentEntity.getProperty("commentInput");
-        long id = commentEntity.getKey().getId();
+        commentEntity.getProperty("name");
     
-    Task comment = new Task(id, commentInput, timestamp);
+    Task comment = new Task(name, commentInput, timestamp);
     comments.add(comment);
    }
     
@@ -98,6 +99,7 @@ public class DataServlet extends HttpServlet {
 
     Entity commentEntity = new Entity("Comments");
     commentEntity.setProperty("commentInput", commentInput);
+    commentEntity.setProperty("name", name);
     commentEntity.setProperty("timestamp", timestamp);
     commentEntity.setProperty("email", email);
     commentEntity.setProperty("displayemail", displayemail);

@@ -36,7 +36,6 @@ public class StatusServlet extends HttpServlet {
       String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
 
       response.getWriter().println("<p>You must <a href=\"" + loginUrl + "\">Login</a> to add a comment.</p>");
-      form.style.display = "none";
     }
   }
 }
