@@ -15,7 +15,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat"}
 
 </style>
 
-<body class="w3-black">
+<body class="w3-black" onload="loadPage()" >
 
 <!-- Icon Bar (Sidebar) -->
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
@@ -123,13 +123,25 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat"}
       <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Phone: (334)777-XXXX </p>
       <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </i> Email: <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to=wseawright@google.com"> wseawright@google.com </a></p>
     </div><br>
-      
+
   <!-- Comments Section -->
+<p id="login"> </p>
+<h5 id="error"></h5>
+
+    <form action="/data" method="POST" id="commentSection" >
     <p>Leave a comment:</p>
-    <form action="/data" method="POST">
         <p><input class="w3-input w3-padding-16" type="text" name="commentInput" placeholder="comment"></p>
+        <p><input class="w3-input w3-padding-10" type="text" name="name" placeholder="name(optional)"></p>
+        <p>
+          <label>
+            <input id="displayemail" name="displayemail" type="checkbox" class="filled-in" checked="checked" />
+            <span>Display email next to comment</span>
+          </label>
+        </p>
         <button class="w3-button w3-light-grey w3-padding-large" type="submit"> Leave Comment </button>
     </form>
+        
+    <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="login"></div>
   </div>
   
     <!-- Footer -->
@@ -143,3 +155,5 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat"}
   </footer>
 
 <!-- END PAGE CONTENT -->
+</body>
+</html>

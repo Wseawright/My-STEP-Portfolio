@@ -22,6 +22,8 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -45,7 +47,7 @@ public class DataServlet extends HttpServlet {
   }
 
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String commentInput = getParameter(request, "commentInput", "");
     long timestamp = System.currentTimeMillis();
     
@@ -57,7 +59,7 @@ public class DataServlet extends HttpServlet {
     datastore.put(commentEntity);
     
     response.setContentType("text/html;");
-    response.getWriter().println(commentInput);
+    response.getWriter().println(commentEntity);
     response.sendRedirect("/index.html");
 
 // load comments code
@@ -79,6 +81,35 @@ public class DataServlet extends HttpServlet {
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(comments));
    }
+
+ public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    UserService userService = UserServiceFactory.getUserService();
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
+    // Must be logged in to post comments
+    String commentInput = request.getParameter("commentInput");
+    String name = request.getParameter("name");
+    long timestamp = System.currentTimeMillis();
+    String email = userService.getCurrentUser().getEmail();
+    String displayemail;
+    
+    if (request.getParameter("displayemail") == null) {
+      displayemail = "off";
+    } else {
+      displayemail = "on";
+    }
+
+    Entity commentEntity = new Entity("Comments");
+    commentEntity.setProperty("commentInput", commentInput);
+    commentEntity.setProperty("timestamp", timestamp);
+    commentEntity.setProperty("email", email);
+    commentEntity.setProperty("displayemail", displayemail);
+    datastore.put(commentEntity);
+
+    response.sendRedirect("/index.html");
+    
+  }
 
     //requst parameter was not specified by client
   public String getParameter(HttpServletRequest request, String name, String defaultValue) {

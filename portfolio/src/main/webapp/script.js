@@ -26,17 +26,35 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
-
 function getData() {
   fetch('/data').then(response => response.text()).then((data) => {
     document.getElementById('data-container').innerText = data;
   });
 }
 
-function getStatus() {
-  fetch('/status').then(response => response.text()).then((data) => {
-    document.getElementById('data-container').innerText = data;
+function loadUser(){
+    fetch('/status').then(response => response.text()).then((txt) => {
+    var form = document.getElementById("commentSection");
+    if (txt.includes("You")) {
+      form.style.hidden;
+      document.getElementById("error").innerHTML = "<i>" + txt + "</i>";
+    } else{
+      document.getElementById("error").innerHTML = "<i>" + txt + "</i>";
+    }});
+}
+
+function login() {
+  fetch('/status').then((response) => {
+     const loginElement = document.getElementById('login');
+     console.log(response)
+     loginElement.innerHTML = response;
   });
 }
 
+function loadPage(){
+    login();
+    getStatus();
+    getData();
+    loadUser();
 
+}
