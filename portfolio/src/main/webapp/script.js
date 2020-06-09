@@ -44,10 +44,10 @@ function loadUser(){
 }
 
 function login() {
-  fetch('/status').then((response) => {
+  fetch('/status').then(response => response.text()).then((txt) => {
      const loginElement = document.getElementById('login');
-     console.log(response)
-     loginElement.innerHTML = response;
+     console.log(txt)
+     loginElement.innerHTML = txt;
   });
 }
 
