@@ -127,22 +127,28 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat"}
     </div><br>
 
   <!-- Comments Section -->
-    <div class="w3-content w3-justify w3-text-grey w3-padding-32" id="login"></div>
+    <div class="w3-content w3-justify w3-text-grey w3-padding-20" id="login"></div>
 
-    <form action="/data" method="POST" id="commentSection" >
+    <form method="post" id="commentSection">
     <p>Leave a comment:</p>
         <p><input class="w3-input w3-padding-16" type="text" name="commentInput" placeholder="comment"></p>
         <p><input class="w3-input w3-padding-10" type="text" name="name" placeholder="name(optional)"></p>
+        <br>
+        <p><input class="w3-input w3-padding-10" type="file" name="file" ></p>
+
         <p>
           <label>
             <input id="displayemail" name="displayemail" type="checkbox" class="filled-in" checked="checked" />
             <span>Display email next to comment</span>
           </label>
         </p>
-        <button class="w3-button w3-light-grey w3-padding-large" type="submit"> Leave Comment </button>
-    </form>
         
-    <!-- <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="login"></div> -->
+        <button class="w3-button w3-light-grey w3-padding-large" type="submit"> Submit </button>
+    </form>
+
+    <br></br>
+
+    <div class="w3-content w3-justify w3-text-grey w3-padding-20" id="file"></div>
   </div>
   
     <!-- Footer -->

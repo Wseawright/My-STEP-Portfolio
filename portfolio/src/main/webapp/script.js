@@ -46,7 +46,19 @@ function loadUser(){
     }});
 }
 
+function fetchBlobstoreUrlAndShowForm() {
+  fetch('/blobstore-upload').then((response) => {
+        return response.text();
+      })
+      .then((imageUploadUrl) => {
+        const messageForm = document.getElementById('commentSection');
+        messageForm.action = imageUploadUrl;
+        messageForm.classList.remove('hidden');
+      });
+}
+
 function loadPage(){
+    fetchBlobstoreUrlAndShowForm();
     getData();
     loadUser();
 }
