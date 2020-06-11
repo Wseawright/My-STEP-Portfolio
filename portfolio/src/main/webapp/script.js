@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
 /**
  * Adds a random greeting to the page.
  */
@@ -28,9 +31,7 @@ function addRandomGreeting() {
 }
 function getData() {
   fetch('/data').then(response => response.text()).then((txt) => {
-    const dataElement = document.getElementById('commentInput');
-    dataElement.innerHTML = txt;
-    document.getElementById('data-container').innerHTML = txt;
+    document.getElementById('data-container').innerText = txt;
   });
 }
 
@@ -57,6 +58,26 @@ function fetchBlobstoreUrlAndShowForm() {
         messageForm.action = imageUploadUrl;
         messageForm.classList.remove('hidden');
       });
+}
+
+function drawChart() {
+  const data = new google.visualization.DataTable();
+  data.addColumn('string', 'instrument');
+  data.addColumn('number', 'playability');
+        data.addRows([
+          ['Mellophone', 10],
+          ['French Horn', 5],
+          ['Trumpet', 15]
+        ]);
+  const options = {
+    'title': 'Instruments I know how to play',
+    'width':400,
+    'height':300
+  };
+
+  const chart = new google.visualization.PieChart(
+      document.getElementById('chart-container'));
+  chart.draw(data, options);
 }
 
 function loadPage(){

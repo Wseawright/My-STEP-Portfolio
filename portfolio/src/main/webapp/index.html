@@ -41,6 +41,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat"}
 <div class="w3-padding-large" id="main">
   <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="script.js"></script>
     <h1 class="w3-jumbo">..William J. Seawright..</h1>
     <p>|Google STEP Intern| |Alabama A&M University|</p>
@@ -59,8 +60,13 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat"}
     <p>I learned how to play trumpet during my 8th grade and continue to play through highschool and colleg.
         Now, I am Currently a member of the Marching Maroon and White Band(MMW) at Alabama A&M University.
         My favorite color is blue and I prefer dogs over cats.</p>
-
+    
     <h3 class="w3-padding-16 w3-text-light-grey">My Skills</h3>
+
+
+    <div id="chart-container"></div>
+
+
     <p class="w3-wide">Python</p>
     <div class="w3-white">
       <div class="w3-dark-grey" style="height:28px;width:80%"></div>
@@ -129,11 +135,11 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat"}
   <!-- Comments Section -->
     <div class="w3-content w3-justify w3-text-grey w3-padding-20" id="login"></div>
 
-    <form method="post" id="commentSection">
+    <form method="post" id="commentSection" action="/data">
     <p>Leave a comment:</p>
-        <p><input class="w3-input w3-padding-16" type="text" name="commentInput" placeholder="comment"></p>
-        <p><input class="w3-input w3-padding-10" type="text" name="name" placeholder="name(optional)"></p>
-        <p><input class="w3-input w3-padding-10" type="file" name="file" id="file" ></p>
+        <p><input class="w3-input w3-padding-16" name="commentInput" placeholder="comment"></p>
+        <p><input class="w3-input w3-padding-10" name="name" placeholder="name(optional)"></p>
+        <p><input class="w3-input w3-padding-10" type="file" name="file"></p>
 
         <p>
           <label>
@@ -145,12 +151,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat"}
         <button class="w3-button w3-light-grey w3-padding-large" type="submit"> Submit </button>
     </form>
 
-    <br></br>
-
-    <div class="w3-content w3-justify w3-text-grey w3-padding-10" id="file"></div>
-    <div class="w3-content w3-justify w3-text-grey w3-padding-10" id="data-container"></div>
-
-  </div>
+    </div>
   
     <!-- Footer -->
   <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">

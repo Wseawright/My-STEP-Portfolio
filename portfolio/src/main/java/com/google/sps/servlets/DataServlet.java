@@ -34,36 +34,43 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  public class Comments {
+  public class Task {
     public String commentInput;
     public long timestamp;
     public String name;
     public long id;
+    public String email;
+    public String displayemail;
 
-    public Comments(long id, String name, String commentInput, long timestamp) {
+    public Task(long id, String commentInput, long timestamp, String name, String email, String displayemail) {
         this.commentInput = commentInput;
         this.timestamp = timestamp;
         this.name = name;
         this.id = id;
+        this.email = email;
+        this.displayemail = displayemail;
     }
   }
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    Query query = new Query("Comments").addSort("timestamp", SortDirection.DESCENDING);
+    Query query = new Query("Task").addSort("timestamp", SortDirection.DESCENDING);
     
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    // DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
     
-    List<Comments> comments = new ArrayList<>();
+    List<Task> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
         long id = entity.getKey().getId();
-        long timestamp = (long) entity.getProperty("timestamp");
         String commentInput = (String) entity.getProperty("commentInput");
+        long timestamp = (long) entity.getProperty("timestamp");
         String name = (String) entity.getProperty("name");
-    
-    Comments comment = new Comments(id, name, commentInput, timestamp);
+        String email = (String) entity.getProperty("email");
+        String displayemail = (String) entity.getProperty("displayemail");
+    Task comment = new Task(id, commentInput, timestamp, name, email, displayemail);
     comments.add(comment);
    }
     
@@ -72,10 +79,15 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(gson.toJson(comments));
    }
 
- public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  private String convertToJsonUsingGson(ArrayList<String> lst) {
+    Gson gson = new Gson();
+    String json = gson.toJson(lst);
+    return json;
+  }
+
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     UserService userService = UserServiceFactory.getUserService();
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
     // Must be logged in to post comments
     String commentInput = request.getParameter("commentInput");
