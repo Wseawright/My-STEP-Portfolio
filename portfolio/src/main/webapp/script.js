@@ -28,12 +28,14 @@ function addRandomGreeting() {
 }
 function getData() {
   fetch('/data').then(response => response.text()).then((txt) => {
-    document.getElementById('data-container').innerText = txt;
+    const dataElement = document.getElementById('commentInput');
+    dataElement.innerHTML = txt;
+    document.getElementById('data-container').innerHTML = txt;
   });
 }
 
 function loadUser(){
-    fetch('/status').then(response => response.text()).then((txt) => {
+    fetch('/loginStatus').then(response => response.text()).then((txt) => {
     const loginElement = document.getElementById('login');
     console.log(txt)
     loginElement.innerHTML = txt;
@@ -51,14 +53,14 @@ function fetchBlobstoreUrlAndShowForm() {
         return response.text();
       })
       .then((imageUploadUrl) => {
-        const messageForm = document.getElementById('commentSection');
+        const messageForm = document.getElementById('file');
         messageForm.action = imageUploadUrl;
         messageForm.classList.remove('hidden');
       });
 }
 
 function loadPage(){
-    fetchBlobstoreUrlAndShowForm();
     getData();
-    loadUser();
+    loadUser();    
+    fetchBlobstoreUrlAndShowForm();
 }
