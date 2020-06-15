@@ -26,7 +26,7 @@ public class LoginStatusServlet extends HttpServlet {
     UserService userService = UserServiceFactory.getUserService();
     if (userService.isUserLoggedIn()) {
       String userEmail = userService.getCurrentUser().getEmail();
-      String urlToRedirectToAfterUserLogsOut = "/";
+      String urlToRedirectToAfterUserLogsOut = "/data";
       String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
 
       response.getWriter().println("<p>Hello " + userEmail + "!</p>");
@@ -35,7 +35,7 @@ public class LoginStatusServlet extends HttpServlet {
       String urlToRedirectToAfterUserLogsIn = "/";
       String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
 
-      response.getWriter().println("<p>You must <a href=\"" + loginUrl + "\">Login</a> to add a comment.</p>");
+      response.getWriter().println("<p>You must <a href=\"" + loginUrl + "\">LOGIN</a> first.</p>");
     }
   }
 }

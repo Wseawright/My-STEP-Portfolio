@@ -42,7 +42,7 @@ public class DataServlet extends HttpServlet {
     public String email;
     public String displayemail;
 
-    public Task(long id, String commentInput, long timestamp, String name, String email, String displayemail) {
+    public Task(long id, String name, String commentInput, long timestamp,  String email, String displayemail) {
         this.commentInput = commentInput;
         this.timestamp = timestamp;
         this.name = name;
@@ -70,7 +70,7 @@ public class DataServlet extends HttpServlet {
         String name = (String) entity.getProperty("name");
         String email = (String) entity.getProperty("email");
         String displayemail = (String) entity.getProperty("displayemail");
-    Task comment = new Task(id, commentInput, timestamp, name, email, displayemail);
+    Task comment = new Task(id, name, commentInput, timestamp, email, displayemail);
     comments.add(comment);
    }
     

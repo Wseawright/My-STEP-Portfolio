@@ -2,25 +2,33 @@
 <html>
 <title>Willam Seawright Portfolio</title>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="style.css">
 
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="script.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmSOmeEe2mf2UH-S4oX9cPY00szx8IbgM&callback=initMap"
+        type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmSOmeEe2mf2UH-S4oX9cPY00szx8IbgM"></script>
+
 <style>
-body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat"}
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 .w3-row-padding img {margin-bottom: 12px}
 /* Set the width of the sidebar to 120px */
 .w3-sidebar {width: 120px;background: darkblue;}
 /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
-
+#main {margin-left: 100px}
+/* Remove margins from "page content" on small screens */
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
 </style>
 
 <body class="w3-black" onload="loadPage()" >
 
 <!-- Icon Bar (Sidebar) -->
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-  
   <!-- image in top left corner -->
   <img src="images/pic_me.jpg/" style="width:100%">
   <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
@@ -37,13 +45,22 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat"}
   </a>
 </nav>
 
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+    <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
+    <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
+    <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
+  </div>
+</div>
+
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
   <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="script.js"></script>
-    <h1 class="w3-jumbo">..William J. Seawright..</h1>
+
+    <h1 class="w3-jumbo">William J. Seawright</h1>
     <p>|Google STEP Intern| |Alabama A&M University|</p>
   </header>
 
@@ -123,15 +140,28 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat"}
 
   <!-- Contact Section -->
   <div class="w3-padding-64 w3-content w3-text-grey" id="contact">
-    <h2 class="w3-text-light-grey">Contact Me</h2>
-    <hr style="width:200px" class="w3-opacity">
+    <hr style="width:100%" class="w3-opacity">
+    
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-half">
+            <h2 class="w3-text-light-grey">Contact Me</h2>
+            <hr style="width:200px" class="w3-opacity">
+            <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Montgomery, AL</p>
+            <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Phone: (334)777-XXXX </p>
+            <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </i> Email: <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to=wseawright@google.com"> wseawright@google.com </a></p>     
+      </div>
 
-    <div class="w3-section">
-      <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Montgomery, AL</p>
-      <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Phone: (334)777-XXXX </p>
-      <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </i> Email: <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to=wseawright@google.com"> wseawright@google.com </a></p>
-    </div><br>
+      <div class="w3-half">
+        <div class="w3-section">
+            <div id="map"></div>
+        </div>
+      </div>
+    </div>
+    
+    
+    </br><hr style="width:100%" class="w3-opacity"></br>
 
+        
   <!-- Comments Section -->
     <div class="w3-content w3-justify w3-text-grey w3-padding-20" id="login"></div>
 
@@ -139,7 +169,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat"}
     <p>Leave a comment:</p>
         <p><input class="w3-input w3-padding-16" name="commentInput" placeholder="comment"></p>
         <p><input class="w3-input w3-padding-10" name="name" placeholder="name(optional)"></p>
-        <p><input class="w3-input w3-padding-10" type="file" name="file"></p>
+        <p><input class="w3-input w3-padding-10" type="file" name="file" action="/blobstore-upload"></p>
 
         <p>
           <label>
@@ -159,6 +189,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat"}
         <i class="fa fa-facebook-official w3-hover-opacity"></i></a>
     <a href="https://www.linkedin.com/in/william-seawright-80a3a2189/"> 
         <i class="fa fa-linkedin w3-hover-opacity"></i></a>
+    <a href="https://github.com/Wseawright"> 
+        <i class="fa fa-github w3-hover-opacity"></i></a>
     <p class="w3-medium">William J. Seawright</p>
   <!-- End footer -->
   </footer>

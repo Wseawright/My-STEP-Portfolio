@@ -77,11 +77,19 @@ function drawChart() {
 
   const chart = new google.visualization.PieChart(
       document.getElementById('chart-container'));
-  chart.draw(data, options);
+      chart.draw(data, options);
 }
+
+function createMap() {
+  const map = new google.maps.Map(
+      document.getElementById('map'),
+      {center: {lat: 42.3627196, lng: -71.0871065}, zoom: 16});
+}
+
 
 function loadPage(){
     getData();
-    loadUser();    
+    loadUser();   
+    createMap(); 
     fetchBlobstoreUrlAndShowForm();
 }
