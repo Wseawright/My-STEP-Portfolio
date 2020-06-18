@@ -34,7 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  public class Task {
+  public class Comment {
     public String commentInput;
     public long timestamp;
     public String name;
@@ -42,7 +42,7 @@ public class DataServlet extends HttpServlet {
     public String email;
     public String displayemail;
 
-    public Task(long id, String name, String commentInput, long timestamp,  String email, String displayemail) {
+    public Comment(long id, String name, String commentInput, long timestamp,  String email, String displayemail) {
         this.commentInput = commentInput;
         this.timestamp = timestamp;
         this.name = name;
@@ -50,19 +50,54 @@ public class DataServlet extends HttpServlet {
         this.email = email;
         this.displayemail = displayemail;
     }
+    public long getId() {
+      return id;
+    }
+    public String getTitle() {
+      return commentInput;
+    }
+    public long getTimestamp() {
+      return timestamp;
+    }
+    public String getName() {
+      return name;
+    }
+    public String getEmail() {
+      return email;
+    }
   }
-
+  public int maxcount = 3;
+  
+    
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    public String sort = "newest";
+
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    if (!(request.getParameter("sort") == null)) {
+      sort = request.getParameter("sort");
+    }
 
-    Query query = new Query("Task").addSort("timestamp", SortDirection.DESCENDING);
+    Query query;
+    if (sort.equals("newest")) {
+      query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    } else if (sort.equals("oldest")) {
+      query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
+    } else if (sort.equals("alphabetical")) {
+      query = new Query("Comment").addSort("name", SortDirection.ASCENDING);
+    } else {
+      query = new Query("Comment").addSort("name", SortDirection.DESCENDING);
+    }    
     
-    // DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    if (!(request.getParameter("maxcomments") == null)) {
+      maxcount = Integer.parseInt(request.getParameter("maxcomments"));
+    }
+
     PreparedQuery results = datastore.prepare(query);
+    int count = 0;
     
-    List<Task> comments = new ArrayList<>();
+    List<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
         long id = entity.getKey().getId();
         String commentInput = (String) entity.getProperty("commentInput");
@@ -70,20 +105,27 @@ public class DataServlet extends HttpServlet {
         String name = (String) entity.getProperty("name");
         String email = (String) entity.getProperty("email");
         String displayemail = (String) entity.getProperty("displayemail");
-    Task comment = new Task(id, name, commentInput, timestamp, email, displayemail);
+    Comment comment = new Comment(id, name, commentInput, timestamp, email, displayemail);
     comments.add(comment);
+
+    count++;
+    if (count >= maxcount) {
+        break;
+      }
    }
     
-    Gson gson = new Gson();
     response.setContentType("application/json;");
-    response.getWriter().println(gson.toJson(comments));
-   }
+    Gson gson = new Gson();
+    String json = gson.toJson(comments);
+    response.getWriter().println(json);
+  }
 
   private String convertToJsonUsingGson(ArrayList<String> lst) {
     Gson gson = new Gson();
     String json = gson.toJson(lst);
     return json;
   }
+
 
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -110,17 +152,13 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty("displayemail", displayemail);
     
     datastore.put(commentEntity);
-    response.sendRedirect("/index.html");
-    
+    response.sendRedirect("/response.html");  
   }
 
-    //requst parameter was not specified by client
-  public String getParameter(HttpServletRequest request, String name, String defaultValue) {
-    String value = request.getParameter(name);
-    if (value == null) {
-      return defaultValue;
-    }
-    return value;
-    }
+public void updateCount(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    if (!(request.getParameter("maxcomments") == null)) {
+      maxcount = Integer.parseInt(request.getParameter("maxcomments"));
+    }}
 }
+
 
