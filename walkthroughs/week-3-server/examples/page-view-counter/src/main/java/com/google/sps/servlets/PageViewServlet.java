@@ -30,7 +30,7 @@ public class PageViewServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     pageViews++;
 
-    response.setContentType("text/html;");
+    response.setContentType("content/html;");
     response.getWriter().println("<h1>Page Views</h1>");
     response.getWriter().println("<p>This page has been viewed " + pageViews + " times.</p>");
   }
